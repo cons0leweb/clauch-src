@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clauncher dev</title>
+    <!-- Подключение Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <link href="style.dev.min.css" rel="stylesheet">    
+</head>
+
+<body>
+    <div class="container" id="snowContainer">
+        <div class="section">
+            <h2 id="builds-title">Builds</h2>
+            <div id="builds"></div><br>
+            <hr style="width:100%;text-align:left;margin:10px">
+            <button type="button" class="btn btn-primary" id="createNewBuildButton">
+                Create New Build
+            </button>
+            <button type="button" class="btn btn-secondary" id="settingsButton">
+                Settings
+            </button>
+            <!--<button type="button" class="btn btn-secondary" id="openModsPageButton">
+                Open Mods Page
+            </button>-->
+        </div>
+    </div>
+
+    <!-- Модальное окно для создания новой сборки -->
+    <div id="newBuildModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="newBuildModalClose">&times;</span>
+            <h2>Create New Build</h2>
+            <form id="new-build-form">
+                <div class="form-group">
+                    <label for="build-name" id="build-name-label">Name:</label>
+                    <input type="text" id="build-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="build-version" id="build-version-label">Version:</label>
+                    <select id="build-version" required>
+                        <option value="0.24.1">0.24.1</option>
+                        <option value="0.24.0">0.24</option>
+                        <option value="0.23.4">0.23.4</option>
+                        <option value="0.23.3">0.23.3</option>
+                        <option value="0.23.2">0.23.2</option>
+                        <option value="0.23.1">0.23.1</option>
+                        <option value="0.23.0">0.23</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" id="add-build-button" class="btn btn-primary">Add Build</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно для настроек -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="settingsModalClose">&times;</span>
+            <h2>Settings</h2>
+            <form id="settings-form">
+                <div class="form-group">
+                    <label for="language" id="language-label">Language:</label>
+                    <select id="language">
+                        <option value="en">English</option>
+                        <option value="ru">Russian</option>
+                        <!-- Add more languages as needed -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="theme" id="theme-label">Theme:</label>
+                    <select id="theme">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="expensive">Expensive</option>
+                        <option value="lsd">Грибы (ОСУЖДАЕМ)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="notifications" id="notifications-label">Notifications:</label>
+                    <select id="notifications">
+                        <option value="enabled">Enabled</option>
+                        <option value="disabled">Disabled</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="auto-update" id="auto-update-label">Auto Update:</label>
+                    <select id="auto-update">
+                        <option value="enabled">Enabled</option>
+                        <option value="disabled">Disabled</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" id="save-settings-button" class="btn btn-primary">Save Settings</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" id="open-folder-button" class="btn btn-secondary">
+                        <i class="fas fa-folder-open"></i> Open Launcher Folder
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script crossorigin="" src="main.js"></script>
+    <script src="snow.js"></script>
+    <script>
+        // Функция для открытия страницы с модами
+        document.getElementById('openModsPageButton').addEventListener('click', () => {
+            window.location.href = 'mods.html';
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+{
+  "name": "clauncher",
+  "version": "0.0.6",
+  "main": "./js/main.js",
+  "scripts": {
+    "build": "electron-builder",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "keywords": [],
+  "author": "cons0leweb",
+  "license": "UNLICENSED",
+  "description": "clauncher by cons0leweb ver 0.0.3 dev build",
+  "devDependencies": {
+    "@electron-forge/cli": "^7.5.0",
+    "@electron-forge/maker-deb": "^7.5.0",
+    "@electron-forge/maker-rpm": "^7.5.0",
+    "@electron-forge/maker-squirrel": "^7.5.0",
+    "@electron-forge/maker-zip": "^7.5.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.5.0",
+    "@electron-forge/plugin-fuses": "^7.5.0",
+    "@electron/fuses": "^1.8.0",
+    "electron": "^33.2.0"
+  },
+  "build": {
+    "appId": "com.cons0leweb.clauncher",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "cons0leweb",
+        "repo": "clauch-package"
+      }
+    ],
+    "productName": "clauncher",
+    "directories": {
+      "output": "out"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable",
+        "zip"
+      ],
+      "asar": true,
+      "compression": "maximum"
+    },
+    "nsis": {
+      "oneClick": true
+    },
+    "portable": {
+      "artifactName": "clauncher-portable.exe"
+    },
+    "files": [
+      "**/*",
+      "!node_modules/**/*",
+      "src/**/*",
+      "!test/**/*",
+      "!docs/**/*",
+      "!*.md",
+      "!*.log",
+      "!*.txt"
+    ]
+  },
+  "dependencies": {
+    "@fluentui/web-components": "^2.6.1",
+    "adm-zip": "^0.5.16",
+    "axios": "^1.7.7",
+    "electron-squirrel-startup": "^1.0.1",
+    "electron-updater": "^6.3.9",
+    "sqlite3": "^5.1.7"
+  }
+}

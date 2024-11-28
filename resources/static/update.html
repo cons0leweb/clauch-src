@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Available</title>
+    <style>
+        :root {
+            --background-color: #1a1a1a; /* Темный фон */
+            --text-color: #f5f5f5; /* Светлый текст */
+            --primary-color: #c2c2c27a; /* Фиолетовый акцент */
+            --secondary-color: #7272728c; /* Голубой акцент */
+            --modal-background: rgba(26, 26, 26, 0.719); /* Темный фон модального окна с небольшой прозрачностью */
+            --modal-content-background: #33333396; /* Темный фон содержимого модального окна */
+            --button-hover: #868686; /* Темно-фиолетовый при наведении */
+            --button-secondary-hover: #474747; /* Темно-голубой при наведении */
+            --input-border: #444; /* Темная граница поля ввода */
+            --input-focus: #ffffff; /* Фиолетовая граница поля ввода при фокусе */
+            --font-family: 'Montserrat', sans-serif; /* Основной шрифт */
+            --font-size-base: 16px; /* Базовый размер шрифта */
+            --font-size-small: 0.875rem; /* Маленький размер шрифта */
+            --font-size-large: 1.25rem; /* Большой размер шрифта */
+            --border-radius: 8px; /* Стандартный радиус скругления */
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Стандартная тень */
+            --transition-duration: 0.3s; /* Стандартная длительность анимации */
+            --transition-timing: ease-in-out; /* Стандартная функция анимации */
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .update-container {
+            background-color: var(--modal-content-background);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            max-width: 300px;
+        }
+
+        .update-container h1 {
+            font-size: var(--font-size-large);
+            margin-bottom: 20px;
+        }
+
+        .update-container p {
+            font-size: var(--font-size-base);
+            margin-bottom: 20px;
+        }
+
+        .update-container button {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color var(--transition-duration) var(--transition-timing);
+        }
+
+        .update-container button:hover {
+            background-color: var(--button-hover);
+        }
+    </style>
+</head>
+<body>
+    <div class="update-container">
+        <h1>Update Available</h1>
+        <p>A new version of the application is available. Would you like to download and install it now?</p>
+        <button id="update-now">Update Now</button>
+        <button id="later">Later</button>
+    </div>
+
+    <script>
+        const { ipcRenderer } = require('electron');
+
+        document.getElementById('update-now').addEventListener('click', () => {
+            ipcRenderer.send('start-update');
+        });
+
+        document.getElementById('later').addEventListener('click', () => {
+            window.close();
+        });
+    </script>
+</body>
+</html>

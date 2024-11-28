@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voxel World - Моды</title>
+    <style>
+        :root {
+            --background-color: #1a1a1a; /* Темный фон */
+            --text-color: #f5f5f5; /* Светлый текст */
+            --primary-color: #c2c2c27a; /* Фиолетовый акцент */
+            --secondary-color: #7272728c; /* Голубой акцент */
+            --modal-background: rgba(26, 26, 26, 0.719); /* Темный фон модального окна с небольшой прозрачностью */
+            --modal-content-background: #33333396; /* Темный фон содержимого модального окна */
+            --button-hover: #868686; /* Темно-фиолетовый при наведении */
+            --button-secondary-hover: #474747; /* Темно-голубой при наведении */
+            --input-border: #444; /* Темная граница поля ввода */
+            --input-focus: #ffffff; /* Фиолетовая граница поля ввода при фокусе */
+            --font-family: 'Montserrat', sans-serif; /* Основной шрифт */
+            --font-size-base: 16px; /* Базовый размер шрифта */
+            --font-size-small: 0.875rem; /* Маленький размер шрифта */
+            --font-size-large: 1.25rem; /* Большой размер шрифта */
+            --border-radius: 8px; /* Стандартный радиус скругления */
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Стандартная тень */
+            --transition-duration: 0.3s; /* Стандартная длительность анимации */
+            --transition-timing: ease-in-out; /* Стандартная функция анимации */
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            font-size: var(--font-size-base);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .mod-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .mod-card {
+            background-color: var(--modal-content-background);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+            transition: background-color var(--transition-duration) var(--transition-timing);
+        }
+
+        .mod-card:hover {
+            background-color: var(--button-hover);
+        }
+
+        .mod-card img {
+            width: 100%;
+            border-radius: var(--border-radius);
+        }
+
+        .mod-card h2 {
+            font-size: var(--font-size-large);
+            margin: 10px 0;
+        }
+
+        .mod-card p {
+            font-size: var(--font-size-small);
+            margin: 10px 0;
+        }
+
+        .mod-card .author {
+            font-size: var(--font-size-small);
+            color: var(--secondary-color);
+        }
+
+        .mod-card .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .mod-card .tags span {
+            background-color: var(--primary-color);
+            padding: 5px 10px;
+            border-radius: var(--border-radius);
+            font-size: var(--font-size-small);
+        }
+
+        .mod-card .actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .mod-card .actions button {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color var(--transition-duration) var(--transition-timing);
+        }
+
+        .mod-card .actions button:hover {
+            background-color: var(--button-secondary-hover);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Моды</h1>
+        <div class="mod-list" id="mod-list">
+            <!--  JavaScript -->
+        </div>
+        <button type="button" class="btn btn-secondary" id="backButton">
+            Назад
+        </button>
+    </div>
+
+    <!-- AXIOS COONECET  -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+
+        async function fetchMods() {
+            try {
+                const response = await axios.get('https://voxelworld.ru/api/v1/mods');
+                return response.data;
+            } catch (error) {
+                console.error('Ошибка при получении данных:', error);
+                return [];
+            }
+        }
+
+        // Функция для отображения модов на странице
+        function displayMods(mods) {
+            const modList = document.getElementById('mod-list');
+            modList.innerHTML = ''; // CLEAR ALL
+
+            if (!Array.isArray(mods)) {
+                console.error('Ошибка: данные не являются массивом');
+                return;
+            }
+
+            mods.forEach(mod => {
+                const modCard = document.createElement('div');
+                modCard.className = 'mod-card';
+
+                modCard.innerHTML = `
+                    <img src="${mod.pathLogo}" alt="${mod.title}">
+                    <h2>${mod.title}</h2>
+                    <p>${mod.description}</p>
+                    <div class="author">Автор: ${mod.author.name}</div>
+                    <div class="tags">
+                        ${mod.tags.map(tag => `<span>${tag.title}</span>`).join('')}
+                    </div>
+                    <div class="actions">
+                        <button onclick="showDetails(${mod.id})">Подробнее</button>
+                        <button onclick="downloadMod(${mod.id})">Скачать</button>
+                    </div>
+                `;
+
+                modList.appendChild(modCard);
+            });
+        }
+
+        function showDetails(modId) {
+            alert(`Подробная информация о моде с ID: ${modId}`);
+        }
+
+        function downloadMod(modId) {
+            alert(`Скачивание мода с ID: ${modId}`);
+        }
+
+        document.getElementById('backButton').addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+
+        window.onload = async () => {
+            const mods = await fetchMods();
+            displayMods(mods);
+        };
+    </script>
+</body>
+</html>

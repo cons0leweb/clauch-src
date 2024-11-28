@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <style>
+        :root {
+            --background-color: #1a1a1a; /* Темный фон */
+            --text-color: #f5f5f5; /* Светлый текст */
+            --primary-color: #c2c2c2; /* Фиолетовый акцент */
+            --secondary-color: #727272; /* Голубой акцент */
+            --modal-content-background: #333333; /* Темный фон содержимого модального окна */
+            --font-family: 'Montserrat', sans-serif; /* Основной шрифт */
+            --font-size-base: 16px; /* Базовый размер шрифта */
+            --font-size-small: 0.875rem; /* Маленький размер шрифта */
+            --font-size-large: 1.25rem; /* Большой размер шрифта */
+            --border-radius: 8px; /* Стандартный радиус скругления */
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Стандартная тень */
+            --transition-duration: 0.3s; /* Стандартная длительность анимации */
+            --transition-timing: ease-in-out; /* Стандартная функция анимации */
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-family: var(--font-family);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            background-color: var(--modal-content-background);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+            max-width: 400px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: var(--font-size-large);
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: var(--font-size-base);
+            margin-bottom: 10px;
+        }
+
+        .version {
+            font-size: var(--font-size-small);
+            color: var(--secondary-color);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <h1>Clauncher</h1>
+        <p class="version">v 0.0.3</p>
+        <p>by consoleweb</p>
+
+    </div>
+</body>
+</html>
